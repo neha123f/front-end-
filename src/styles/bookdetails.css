@@ -1,0 +1,180 @@
+.bookdetails-body{
+    /* background-color: gray; */
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    scroll-behavior: smooth;
+    width:100%;
+}
+/*Header CSS*/
+header{
+  z-index:1000;
+}
+.offcanvas-body a{
+  color:whitesmoke;
+  font-size: 18px;
+}
+.lineUp {
+  animation: 2s anim-lineUp ease-out 1;
+}
+@keyframes anim-lineUp {
+  0% {
+    opacity: 0;
+    transform: translateY(80%);
+  }
+  20% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+.lineRight{
+animation: 2s anim-lineRight ease-out 1;
+}
+@keyframes anim-lineRight {
+0% {
+  opacity: 0;
+  transform: translateX(-80%);
+}
+20% {
+  opacity: 0;
+}
+50% {
+  opacity: 1;
+  transform: translateX(0%);
+}
+100% {
+  opacity: 1;
+  transform: translateX(0%);
+}
+}
+/* header{
+  position: sticky;
+  top:0px;
+} */
+
+/*Footer CSS */
+.footer-container{
+  background-color: black;
+  width:100%;
+  height:auto;
+  color:whitesmoke;
+  padding: 10px;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.2s;
+}
+#social-links{
+display: flex;
+gap:10px;
+list-style-type: none;
+}
+.social-icon{
+color: whitesmoke;
+margin: 5px;
+font-size: 20px;
+}
+
+  .seat-details-container{
+    flex-grow: 1;
+    margin-top: 100px;
+    
+  }
+  .seat-details-content{
+    display: flex;
+    justify-content:space-between;
+    margin-inline:auto;
+    margin-top:20px;
+    margin-bottom: 20px;
+    height: auto;
+    width: 400px;
+    background-color: rgba(255,255,255,0.13);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 10px rgba(8,7,16,0.6);
+    padding: 20px;
+  }
+  .seat-details-content:hover{
+    transform: translateY(-2%);
+  }
+  .type{
+    width:auto;
+    height:auto;
+    text-align: center;
+    padding: 10px;
+    background-color: brown;
+    color: whitesmoke;
+    border-radius: 20px;
+    padding: 20px;
+  }
+  .icon-shape{
+    background-color: gainsboro;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+  .book-details{
+    padding: 10px;
+  }
+  .text-nowrap{
+    white-space: nowrap;
+  }
+  .seat-details-content h4{
+    font-size: 20px;
+  }
+  .submit-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:10px;
+  }
+
+
+  @media screen and (min-width:300px) {
+    .header-container{
+      flex-direction: column;
+    }
+    .carousel-inner img{
+      height:200px;
+    }
+    .home-main-container{
+      flex-direction: column;
+    }
+    .home-image-container{
+      width:100%;
+      /* display:none; */
+    }
+    .home-book-content{
+      width:100%;
+    }
+    .seat-details-content{
+      width:300px;
+    }
+  }
+  @media screen and (min-width:600px) {
+    .header-container{
+      flex-direction: row;
+    }
+    .carousel-inner img{
+      height:500px;
+    }
+    .home-main-container{
+      flex-direction: row;
+    }
+    .home-image-container{
+      width:100%;
+    }
+    .home-book-content{
+      width:100%;
+    }
+    .seat-details-content{
+      width:400px;
+    }
+  }

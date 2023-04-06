@@ -1,0 +1,257 @@
+.floormap-body{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    scroll-behavior: smooth;
+    width:100%;
+}
+/*Header CSS*/
+header{
+  z-index:1000;
+}
+.offcanvas-body a{
+  color:whitesmoke;
+  font-size: 18px;
+}
+.lineUp {
+    animation: 2s anim-lineUp ease-out 1;
+  }
+@keyframes anim-lineUp {
+    0% {
+      opacity: 0;
+      transform: translateY(80%);
+    }
+    20% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+}
+.lineRight{
+  animation: 2s anim-lineRight ease-out 1;
+}
+@keyframes anim-lineRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-80%);
+  }
+  20% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+/* header{
+    position: sticky;
+    top:0px;
+} */
+
+/*Footer CSS */
+.footer-container{
+    background-color: black;
+    width:100%;
+    height:auto;
+    color:whitesmoke;
+    padding: 10px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.2s;
+}
+#social-links{
+  display: flex;
+  gap:10px;
+  list-style-type: none;
+}
+.social-icon{
+  color: whitesmoke;
+  margin: 5px;
+  font-size: 20px;
+}
+
+
+  .floor-container{
+    flex-grow:1;
+    margin-top: 50px;
+  }
+  .button-container{
+    margin:10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .button-container button{
+    width:100%;
+    margin:10px;
+    white-space: nowrap;
+  }
+  .map-design{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+  }
+  .map-design form{
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width:600px;
+    height:auto;
+    margin:10px;
+  }
+  .submit-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:10px;
+  }
+  #book-btn{
+    margin-top:10px;
+    
+  }
+
+  .seat-container {
+    width: 100px;
+    height:150px;
+    position: relative;
+    display: inline-block;
+    margin:20px;
+  }
+  
+  .seat-container img {
+    display: block;
+    width: 100px;
+  }
+  
+  .seat-container input[type="radio"] {
+    width:20px;
+    height:20px;
+    position: absolute;
+    top: 45px;
+    left: 50px;
+    transform: translate(-50%, -50%);
+  }
+  .seat-container h6{
+    margin-left: 50px;
+  }
+
+  input[type="radio"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: green;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    display: grid;
+    place-content: center;
+  }
+
+  input[type="radio"][disabled]{
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: red;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    display: grid;
+    place-content: center;
+  }
+
+  input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em ;
+  }
+  
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+
+  .booked{
+    background-color: brown;
+  }
+  
+ 
+  
+ 
+
+ 
+
+
+@media screen and (min-width:300px) {
+  .header-container{
+    flex-direction: column;
+  }
+  .carousel-inner img{
+    height:200px;
+  }
+  .book-main-container{
+    flex-direction: column;
+  }
+  .book-image-container{
+    width:100%;
+    /* display:none; */
+  }
+  .book-content{
+    width:100%;
+  }
+}
+@media screen and (min-width:600px) {
+  .header-container{
+    flex-direction: row;
+  }
+  .carousel-inner img{
+    height:500px;
+  }
+  .book-main-container{
+    flex-direction: column;
+  }
+  .book-image-container{
+    width:100%;
+  }
+  .book-content{
+    width:100%;
+  }
+}
+@media screen and (min-width:1000px){
+  .header-container{
+    flex-direction: row;
+  }
+  .carousel-inner img{
+    height:500px;
+  }
+  .book-main-container{
+    flex-direction: row;
+  }
+  .book-image-container{
+    width:100%;
+  }
+  .book-content{
+    width:100%;
+    margin-top: 100px;
+  }
+}
