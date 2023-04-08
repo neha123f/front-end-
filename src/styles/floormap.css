@@ -195,12 +195,6 @@ header{
     background-color: brown;
   }
   
- 
-  
- 
-
- 
-
 
 @media screen and (min-width:300px) {
   .header-container{
@@ -253,5 +247,8 @@ header{
   .book-content{
     width:100%;
     margin-top: 100px;
+  }
+  .button-container{
+    margin-top: 20px;
   }
 }

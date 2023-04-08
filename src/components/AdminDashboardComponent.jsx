@@ -26,7 +26,7 @@ let AdminDashboard=()=>{
                     </a>
                 </li>
                 <li>
-                    <a href="adminbooking.html">
+                    <a href="/adminbooking">
                         <span className="icon"><ion-icon name="calendar"></ion-icon></span>
                         <span className="name">Bookings</span>
                     </a>
@@ -52,11 +52,11 @@ let AdminDashboard=()=>{
             </ul>
         </div>
         <div className={`main ${isActive ? 'active' : ''}`}>
-            <header>
+            <div className="header">
                 <div className="admin-main">
                     <span id="sideBar-btn" onClick={toggleSidebar}><ion-icon name="menu"></ion-icon> <span className="dash-name">Dashboard</span></span>  
                 </div>
-            </header>
+            </div>
             <section className="info">
                 <div className="total">
                     <div>

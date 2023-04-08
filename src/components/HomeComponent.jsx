@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../styles/home.css';
 import layout from '../assets/layout2.png';
+import { userRecords } from "../api";
 
 let Home=()=>{
+
+  const [userData,setUserData]=useState({
+    id:'',name:'',email:'',phone:'',role:'',password:'',booking:{id:'0',type:'0' ,fromDate: '0',toDate:'0',shift:'0',floor: '0',seat:'0',status:false}
+      
+  })
+  console.log(userData)
+
+  const logData=async ()=>{
+    let data={
+      token:window.localStorage.getItem("token")}
+    let response=await userRecords(data)
+    setUserData(response.data.data);
+    }
+
+ useEffect(()=>{  
+    logData();
+  }
+ ,[])
     return (
     <div className="home-body">
     <header>
@@ -44,12 +63,18 @@ let Home=()=>{
         </div>
         <div className="home-book-content lineUp">
           <h3>Hello,</h3>
-          <h3>Harshitha!!</h3>
-          <div className="home-details">
-           <h5>Your seating for Today</h5>
-           <h6>Your desk is 70 at Ground Floor</h6>
-           <a href="book_details.html"><button className="btn btn-secondary">View Pass</button></a>
-          </div>
+          <h3>{userData.name}!!</h3>
+          {userData.booking.id=='0' ?
+                    <div className="home-details"> 
+                      <h5>You have not booked any seat</h5>
+                      <h6>Please book your seat</h6>                    
+                    </div>  
+                      : <div className="home-details">
+                        <h5>Your seating for Today</h5>
+                        <h6>Your desk is {userData.booking.seat} at {userData.booking.floor}</h6>
+                        <a href="book_details.html"><button className="btn btn-secondary">View Pass</button></a>
+                     </div> }
+          
         </div>
       </main>
       <footer className="footer-container">

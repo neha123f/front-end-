@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../styles/profile.css';
 import profileBackground from '../assets/profile-background.jpg';
 import profileLogo from '../assets/profile-image.png';
+import { userRecords } from "../api";
 
 let Profile=()=>{
+
+  const [userData,setUserData]=useState({
+    id:'',name:'',email:'',phone:'',role:'',password:'',booking:{id:'0',type:'0' ,fromDate: '0',toDate:'0',shift:'0',floor: '0',seat:'0',status:false}
+      
+  })
+  console.log(userData)
+
+  const logData=async ()=>{
+    let data={
+      token:window.localStorage.getItem("token")}
+    let response=await userRecords(data)
+    setUserData(response.data.data);
+    }
+
+ useEffect(()=>{  
+    logData();
+  }
+ ,[])
+
     return (
         <div className="profile-body">
             <header>
@@ -51,19 +71,23 @@ let Profile=()=>{
             <div className="user-info-content">
                 <div className="container">
                     <p id="qun">Name</p>
-                    <p id="ans">Harshitha R</p>
+                    <p id="ans">{userData.name}</p>
                 </div>
                 <div className="container">
                     <p id="qun">Employee ID</p>
-                    <p id="ans">1234</p>
+                    <p id="ans">{userData.id}</p>
                 </div>
                 <div className="container">
                     <p id="qun">Email ID</p>
-                    <p id="ans">harshitha.r@valtech.com</p>
+                    <p id="ans">{userData.email}</p>
                 </div>
                 <div className="container">
                     <p id="qun">Phone number</p>
-                    <p id="ans">1234567890</p>
+                    <p id="ans">{userData.phone}</p>
+                </div>
+                <div className="container">
+                    <p id="qun">Role</p>
+                    <p id="ans">{userData.role}</p>
                 </div>
             </div>
         </div>

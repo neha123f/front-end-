@@ -1,47 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import '../styles/book.css'
 import layout from '../assets/layout.jpg';
+import { userRecords } from "../api";
 
 let Book=()=>{
   const [minDate, setMinDate] = useState('');
-  const [fromDate, setFromDate] = useState('');
-  const [toDate, setToDate] = useState('');
-  const [typeOfRequest, setTypeOfRequest] = useState('');
+  const [type, setType] = useState('');
+  const [from, setFrom] = useState('');
+  const [to, setTo] =useState('');
+  const toInputRef = useRef(null);
+  
+
+  const [userData,setUserData]=useState({
+    id:'',name:'',email:'',phone:'',role:'',password:'',booking:{id:'0',type:'0' ,fromDate: '0',toDate:'0',shift:'0',floor: '0',seat:'0',status:false}
+      
+  })
+  console.log(userData)
+
+  const logData=async ()=>{
+    let data={
+      token:window.localStorage.getItem("token")}
+    let response=await userRecords(data)
+    setUserData(response.data.data);
+    }
+
+ useEffect(()=>{  
+    logData();
+  }
+ ,[])
+
   function handleMinDate() {
     const today = new Date();
     const formattedDate = today.toISOString().substr(0, 10);
     setMinDate(formattedDate);
   }
 
-  function handleTypeChange(e) {
-    const type = e.target.value;
-    setTypeOfRequest(type);
 
-    if (type === 'daily') {
-      setToDate(fromDate);
-    } else {
-      const selectedDate = new Date(fromDate);
+  
+
+  useEffect(() => {
+    if (type == 'daily') {
+      setTo(from);
+    } else if (type == 'weekly') {
+      const selectedDate = new Date(from);
       selectedDate.setDate(selectedDate.getDate() + 7);
       const newDate = selectedDate.toISOString().substr(0, 10);
-      setToDate(newDate);
+      setTo(newDate);
     }
-  }
+  }, [from]);
 
-  function handleFromDateChange(e) {
-    const date = e.target.value;
-    setFromDate(date);
-    if (typeOfRequest === 'daily') {
-      setToDate(date);
-    } else {
-      const selectedDate = new Date(date);
-      selectedDate.setDate(selectedDate.getDate() + 7);
-      const newDate = selectedDate.toISOString().substr(0, 10);
-      setToDate(newDate);
-    }
-  }
 
     return(
+      
         <div className="book-body">
+         
             <header>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div className="container-fluid">
@@ -74,32 +86,33 @@ let Book=()=>{
         </div>
       </nav>
             </header>
-            <main class="book-main-container">
-        <div class="book-image-container lineRight">
+            <main className="booking-main-container">
+        <div className="booking-image-container lineRight">
           <img src={layout} alt="layout" width="600" height="400"/>
         </div>
-        <div class="book-content lineUp">
+        <div className="booking-content lineUp">
           <h3>Seat Booking</h3>
-          <div class="book-details">
-            <form action="floormap.html">
-              <div class="form-floating mb-3">
-                <select class="form-select" name="type" id="type" required onChange={handleTypeChange}>
+          
+          <div className="booking-details">
+            <form className="booking-form">
+              <div className="form-floating mb-3">
+                <select className="form-select" name="type" id="type" required onInput={(e)=>setType(e.target.value)}>
                   <option selected></option>
                   <option value="daily">Daily</option>
                   <option value="weekly">Weekly</option>
                 </select>
                 <label for="type">Select type of requests</label>
               </div>
-              <div class="form-floating mb-3">
-                <input type="date" class="form-control" name="from" id="from" required onChange={handleFromDateChange} min={minDate} onFocus={handleMinDate}/>
+              <div className="form-floating mb-3">
+                <input type="date" className="form-control" name="from" id="from" required  onChange={(e)=>setFrom(e.target.value)} min={minDate} onFocus={handleMinDate}/>
                 <label for="from">From Date</label>
               </div>
-              <div class="form-floating mb-3">
-                <input type="date" class="form-control" name="to" id="to" value={toDate} required readOnly/>
+              <div className="form-floating mb-3">
+                <input type="date" className="form-control" name="to" id="to" value={to} required readOnly/>
                 <label for="to">To Date</label>
               </div>
-              <div class="form-floating mb-3">
-                <select class="form-select" name="shift" id="shift" required>
+              <div className="form-floating mb-3">
+                <select className="form-select" name="shift" id="shift" required>
                   <option selected></option>
                   <option value="9am to 6pm">09:00AM - 06:00PM</option>
                   <option value="6am to 2pm">06:00AM - 02:00PM</option>
@@ -108,16 +121,16 @@ let Book=()=>{
                 </select>
                 <label for="shift">Shift time</label>
               </div>
-              <div class="form-floating mb-3">
-                <select class="form-select" name="food" id="food" required>
+              <div className="form-floating mb-3">
+                <select className="form-select" name="food" id="food" required>
                   <option selected></option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
                 </select>
                 <label for="food">Opting for lunch?</label>
               </div>
-              <div class="form-floating mb-3">
-                <select class="form-select" name="floor" id="floor" required >
+              <div className="form-floating mb-3">
+                <select className="form-select" name="floor" id="floor" required >
                   <option selected></option>
                   <option value="Ground Floor">Ground Floor</option>
                   <option value="Mezanine Floor">Mezz Floor</option>
@@ -128,25 +141,25 @@ let Book=()=>{
                 </select>
                 <label for="floor">Select Floor</label>
               </div>
-              <button class="btn btn-secondary">Next</button>
+              <button className="btn btn-secondary">Next</button>
           </form>
           </div>
         </div>
       </main>
-      <footer class="footer-container">
+      <footer className="footer-container">
         <p>&copy; 2023 Valtech, India</p>
         <ul id="social-links">
           <li>
-            <a href="https://www.instagram.com/explore/locations/611271258/valtech-india/"><span class="social-icon"><ion-icon name="logo-instagram"></ion-icon></span>
+            <a href="https://www.instagram.com/explore/locations/611271258/valtech-india/"><span className="social-icon"><ion-icon name="logo-instagram"></ion-icon></span>
             </a>
           </li>
           <li>
-            <a href="https://twitter.com/valtech_india"><span class="social-icon"><ion-icon name="logo-twitter"></ion-icon>
+            <a href="https://twitter.com/valtech_india"><span className="social-icon"><ion-icon name="logo-twitter"></ion-icon>
             </span>
             </a>
           </li>
           <li>
-            <a href="https://www.facebook.com/valtech.india/"><span class="social-icon"><ion-icon name="logo-facebook"></ion-icon>
+            <a href="https://www.facebook.com/valtech.india/"><span className="social-icon"><ion-icon name="logo-facebook"></ion-icon>
             </span>
             </a>
           </li>

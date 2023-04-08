@@ -82,9 +82,7 @@ margin: 5px;
 font-size: 20px;
 }
 
-
-
-form{
+.booking-details form{
     height: auto;
     width: 350px;
     background-color: rgba(255,255,255,0.13);
@@ -96,23 +94,23 @@ form{
     /* margin:5px; */
     margin-bottom: 50px;
 }
-form *{
+.booking-details form *{
     font:inherit;
 }
-.book-content h3{
+.booking-content h3{
     margin-top: 50px;
 }
-.book-main-container h3{
+.booking-main-container h3{
     margin: 10px;
 }
-label{
+.booking-form label{
     display: block;
     /* margin-top: 30px; */
     font-size: 16px;
     font-weight: 500;
-    padding: 5px;
+    padding: 10px;
 }
-input{
+.booking-form input{
     display: block;
     height: 50px;
     width: 100%;
@@ -123,10 +121,10 @@ input{
     font-size: 14px;
     font-weight: 300;
 }
-input:hover{
+.booking-form input:hover{
     opacity: 0.5;
 }
- .book-main-container{
+ .booking-main-container{
     width:100%;
     height:auto;
     padding: 10px;
@@ -134,15 +132,15 @@ input:hover{
     display: flex;
     margin-top: 100px;
   }
-  .book-image-container{
+  .booking-image-container{
     width:50%;
     
   }
-  .book-image-container img{
+  .booking-image-container img{
     height:100%;
     width:100%;
   }
-  .book-content{
+  .booking-content{
     width:50%;
     height:auto;
     display: flex;
@@ -151,7 +149,7 @@ input:hover{
     align-items: center;
     
   }
-  .book-details button{
+  .booking-details button{
     text-align: center;
     width:100%;
     margin-top:10px;
@@ -164,14 +162,14 @@ input:hover{
     .carousel-inner img{
       height:200px;
     }
-    .book-main-container{
+    .booking-main-container{
       flex-direction: column;
     }
-    .book-image-container{
+    .booking-image-container{
       width:100%;
       /* display:none; */
     }
-    .book-content{
+    .booking-content{
       width:100%;
     }
   }
@@ -182,13 +180,13 @@ input:hover{
     .carousel-inner img{
       height:500px;
     }
-    .book-main-container{
+    .booking-main-container{
       flex-direction: column;
     }
-    .book-image-container{
+    .booking-image-container{
       width:100%;
     }
-    .book-content{
+    .booking-content{
       width:100%;
     }
   }
@@ -199,13 +197,13 @@ input:hover{
     .carousel-inner img{
       height:500px;
     }
-    .book-main-container{
+    .booking-main-container{
       flex-direction: row;
     }
-    .book-image-container{
+    .booking-image-container{
       width:100%;
     }
-    .book-content{
+    .booking-content{
       width:100%;
       
     }

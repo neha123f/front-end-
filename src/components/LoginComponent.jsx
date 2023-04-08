@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+import { loginUsers } from "../api";
 import '../styles/login.css';
 
 let Login=()=>{
@@ -8,17 +7,32 @@ let Login=()=>{
     const [username,setUsername]=useState("");
     const [password,setPassword]=useState("");
 
-    let navigate=useNavigate();
 
-    const handleSubmit=(e)=>{
+    const handleSubmit=async (e)=>{
         e.preventDefault();
-        navigate(`/home?username=${username}&password=${password}`)
+
+        if(username==="admin" && password==="admin@123"){
+          window.location="/admin";
+        }
+        let data={
+          username,
+          password
+        }
+        const response=await loginUsers(data);
+        console.log(response.data.data);
+        if(response.data.error){
+          alert(response.data.error)
+        }else{
+          window.localStorage.setItem("token",response.data.data)
+          window.location="/home";
+        }
+
     }
 
   return (
     <div className="login-body">
     <div className="login-container">
-      <form className="login-form" onSubmit={(e)=>handleSubmit}>
+      <form className="login-form" onSubmit={handleSubmit}>
         <div className="logo"></div>
         <h3>Login</h3>
         <label htmlFor="username">Username</label>
@@ -40,10 +54,11 @@ let Login=()=>{
           onChange={(e)=>setPassword(e.target.value)}
         />
         <div className="forget">
-          <Link to="/forgot">Forgot Password?</Link>
+          <a href="/forgot">Forgot Password?</a>
         </div>
-        <div id="error"></div>
-        <Link to="/home"><button type="submit">Log In</button></Link>
+        <div id="error">
+        </div>
+        <button type="submit">Log In</button>
       </form>
     </div>
     </div>

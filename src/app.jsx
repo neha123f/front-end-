@@ -1,6 +1,10 @@
 import { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AdminBooking from "./components/AdminBookingComponent";
 import AdminDashboard from "./components/AdminDashboardComponent";
+import AdminReports from "./components/AdminReportsComponent";
+import AdminUsers from "./components/AdminUsersComponent";
+import AdminUpdate from "./components/AdminUserUpdateComponent";
 import Book from "./components/BookComponent";
 import BookDetails from "./components/BookDetailsComponent";
 import BookSuccess from "./components/BookSuccessComponent";
@@ -21,6 +25,10 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<Login />} />  {/* Router to render the Main Component */}            
             <Route path="/admin" element={<AdminDashboard />} />  {/* Router to render the Main Component */}            
+            <Route path="/adminusers" element={<AdminUsers />} />  {/* Router to render the Main Component */}            
+            <Route path="/adminbooking" element={<AdminBooking />} />  {/* Router to render the Main Component */}            
+            <Route path="/adminreports" element={<AdminReports />} />  {/* Router to render the Main Component */}            
+            <Route path="/update" element={<AdminUpdate />} />  {/* Router to render the Main Component */}            
             <Route path="/forgot" element={<ForgotPassword />} />  {/* Router to render the Main Component */}            
             <Route path="/forgot/successmessage" element={<SuccessMessage />} />  {/* Router to render the Main Component */}            
             <Route path="/home" element={<Home />} />  {/* Router to render the Main Component */}            

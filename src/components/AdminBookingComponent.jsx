@@ -12,7 +12,7 @@ let AdminBooking=()=>{
         <div className="admin-container">
         <div className={`navigation ${isActive ? 'active' : ''}`}>
             <div className="company">    
-                <a href="">   
+                <a href="/admin">   
                          <span className="icon"><img src={valtechLogo} alt="valtech-logo" width="20" height="20" className="logo"/>  </span>                  
                         <span className="company-name">Valtech_</span>
                 </a>    
@@ -52,11 +52,11 @@ let AdminBooking=()=>{
             </ul>
         </div>
         <div className={`main ${isActive ? 'active' : ''}`}>
-            <header>
+            <div className="header">
                 <div className="admin-main">
                     <span id="sideBar-btn" onClick={toggleSidebar}><ion-icon name="menu"></ion-icon> <span className="dash-name">Bookings</span></span>  
                 </div>
-            </header>
+            </div>
 
             <form onsubmit="return false;">
                 

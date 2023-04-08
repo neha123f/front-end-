@@ -45,7 +45,10 @@ let FloorMap=()=>{
           <button id="btn2" className="btn btn-secondary">Seat : </button>
         </div>
         <div className="map-design">
-            <form id="form-container" >        
+            <form >   
+            <div id="form-container">
+
+              </div>     
             <div className="submit-button">
             <button id="book-btn" className="btn btn-secondary">Book Seat</button>
             </div>

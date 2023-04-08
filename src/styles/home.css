@@ -126,8 +126,9 @@ header{
 .home-details:hover{
   transform: translateY(-2%);
 }
-.home-details h5{
+.home-details h5,h6{
   padding: 10px;
+  text-align: center;
 }
 .home-details a{
   margin: 10px;

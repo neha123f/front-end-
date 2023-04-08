@@ -26,13 +26,13 @@ let AdminReports=()=>{
                     </a>
                 </li>
                 <li>
-                    <a href="/adminbookings" className="active-tab">
+                    <a href="/adminbooking">
                         <span className="icon"><ion-icon name="calendar"></ion-icon></span>
                         <span className="name">Bookings</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/adminusers">
+                    <a href="/adminusers" className="active-tab">
                         <span className="icon"><ion-icon name="people-sharp"></ion-icon></span>
                         <span className="name">Users</span>
                     </a>
@@ -52,11 +52,11 @@ let AdminReports=()=>{
             </ul>
         </div>
         <div className={`main ${isActive ? 'active' : ''}`}>
-            <header>
+            <div className="header">
                 <div className="admin-main">
                     <span id="sideBar-btn" onClick={toggleSidebar}><ion-icon name="menu"></ion-icon> <span className="dash-name">Reports</span></span>  
                 </div>
-            </header>
+            </div>
             <form>
                 <div className="form-floating mb-3">
                     <select className="form-select" name="type" id="type" required onchange="getTypeOfRequest()">
