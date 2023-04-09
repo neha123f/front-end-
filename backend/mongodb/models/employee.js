@@ -13,9 +13,10 @@ const EmployeeSchema=new mongoose.Schema({
         fromDate:{type:String,default:0},
         toDate:{type:String,default:0},
         shift:{type:String,default:0},
+        food:{type:String,default:0},
         floor:{type:String,default:0},
         seat:{type:String,default:0},
-        status:{type:Boolean,default:false},
+        status:{type:String,default:0},
     },
     // allProperties:[{type:mongoose.Schema.Types.ObjectId,ref:'Property'}]
 });

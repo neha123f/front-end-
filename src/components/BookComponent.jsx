@@ -3,13 +3,19 @@ import '../styles/book.css'
 import layout from '../assets/layout.jpg';
 import { userRecords } from "../api";
 
+
 let Book=()=>{
   const [minDate, setMinDate] = useState('');
   const [type, setType] = useState('');
   const [from, setFrom] = useState('');
   const [to, setTo] =useState('');
-  const toInputRef = useRef(null);
+  const [shift, setShift] =useState('');
+  const [food, setFood] =useState('');
+  const [floor, setFloor] =useState('');
   
+  // let formData={
+  //   type,from,to
+  // }
 
   const [userData,setUserData]=useState({
     id:'',name:'',email:'',phone:'',role:'',password:'',booking:{id:'0',type:'0' ,fromDate: '0',toDate:'0',shift:'0',floor: '0',seat:'0',status:false}
@@ -49,7 +55,16 @@ let Book=()=>{
     }
   }, [from]);
 
-
+const handleSubmit=(e)=>{
+  e.preventDefault();
+  window.localStorage.setItem("type",type);
+  window.localStorage.setItem("from",from);
+  window.localStorage.setItem("to",to);
+  window.localStorage.setItem("shift",shift);
+  window.localStorage.setItem("food",food);
+  window.localStorage.setItem("floor",floor);
+  window.location="/floormap";
+}
     return(
       
         <div className="book-body">
@@ -94,12 +109,12 @@ let Book=()=>{
           <h3>Seat Booking</h3>
           
           <div className="booking-details">
-            <form className="booking-form">
+            <form className="booking-form" onSubmit={handleSubmit}>
               <div className="form-floating mb-3">
                 <select className="form-select" name="type" id="type" required onInput={(e)=>setType(e.target.value)}>
                   <option selected></option>
-                  <option value="daily">Daily</option>
-                  <option value="weekly">Weekly</option>
+                  <option value="Daily">Daily</option>
+                  <option value="Weekly">Weekly</option>
                 </select>
                 <label for="type">Select type of requests</label>
               </div>
@@ -112,7 +127,7 @@ let Book=()=>{
                 <label for="to">To Date</label>
               </div>
               <div className="form-floating mb-3">
-                <select className="form-select" name="shift" id="shift" required>
+                <select className="form-select" name="shift" id="shift" required onChange={(e)=>setShift(e.target.value)}>
                   <option selected></option>
                   <option value="9am to 6pm">09:00AM - 06:00PM</option>
                   <option value="6am to 2pm">06:00AM - 02:00PM</option>
@@ -122,7 +137,7 @@ let Book=()=>{
                 <label for="shift">Shift time</label>
               </div>
               <div className="form-floating mb-3">
-                <select className="form-select" name="food" id="food" required>
+                <select className="form-select" name="food" id="food" required onChange={(e)=>setFood(e.target.value)}>
                   <option selected></option>
                   <option value="yes">Yes</option>
                   <option value="no">No</option>
@@ -130,7 +145,7 @@ let Book=()=>{
                 <label for="food">Opting for lunch?</label>
               </div>
               <div className="form-floating mb-3">
-                <select className="form-select" name="floor" id="floor" required >
+                <select className="form-select" name="floor" id="floor" required onChange={(e)=>setFloor(e.target.value)}>
                   <option selected></option>
                   <option value="Ground Floor">Ground Floor</option>
                   <option value="Mezanine Floor">Mezz Floor</option>
@@ -168,5 +183,6 @@ let Book=()=>{
         </div>
     )
 }
+
 
 export default Book;

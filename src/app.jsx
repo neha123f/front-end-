@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AdminBooking from "./components/AdminBookingComponent";
 import AdminDashboard from "./components/AdminDashboardComponent";
 import AdminReports from "./components/AdminReportsComponent";
+import AdminSeat from "./components/AdminSeatComponent";
 import AdminUsers from "./components/AdminUsersComponent";
 import AdminUpdate from "./components/AdminUserUpdateComponent";
 import Book from "./components/BookComponent";
@@ -28,6 +29,7 @@ class App extends Component {
             <Route path="/adminusers" element={<AdminUsers />} />  {/* Router to render the Main Component */}            
             <Route path="/adminbooking" element={<AdminBooking />} />  {/* Router to render the Main Component */}            
             <Route path="/adminreports" element={<AdminReports />} />  {/* Router to render the Main Component */}            
+            <Route path="/adminseat" element={<AdminSeat />} />  {/* Router to render the Main Component */}            
             <Route path="/update" element={<AdminUpdate />} />  {/* Router to render the Main Component */}            
             <Route path="/forgot" element={<ForgotPassword />} />  {/* Router to render the Main Component */}            
             <Route path="/forgot/successmessage" element={<SuccessMessage />} />  {/* Router to render the Main Component */}            

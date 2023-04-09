@@ -1,7 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { userRecords } from "../api";
 import '../styles/bookdetails.css'
 
 let BookDetails=()=>{
+
+  const [userData,setUserData]=useState({
+    id:'',name:'',email:'',phone:'',role:'',password:'',booking:{id:'0',type:'0' ,fromDate: '0',toDate:'0',shift:'0',floor: '0',seat:'0',status:false}
+      
+  })
+  console.log(userData)
+
+  const logData=async ()=>{
+    let data={
+      token:window.localStorage.getItem("token")}
+    let response=await userRecords(data)
+    setUserData(response.data.data);
+    }
+
+ useEffect(()=>{  
+    logData();
+  }
+ ,[])
+
+
     return(
         <div className="bookdetails-body">
             <header>
@@ -40,27 +61,27 @@ let BookDetails=()=>{
             <main className="seat-details-container">
             <div className="seat-details-content">
             <div className="seat">
-            <h4><span className="icon-shape"><ion-icon name="id-card-sharp"></ion-icon></span> Name : Harshitha R</h4>
-            <h4><span className="icon-shape"><ion-icon name="pricetags-sharp"></ion-icon></span> ID : 5435</h4> 
+            <h4><span className="icon-shape"><ion-icon name="id-card-sharp"></ion-icon></span> Name :  {userData.name}</h4>
+            <h4><span className="icon-shape"><ion-icon name="pricetags-sharp"></ion-icon></span> ID : {userData.id}</h4> 
             </div>
             <div className="type">
-                Daily
+                {userData.booking.type}
             </div>
             </div>
             <div className="seat-details-content">
             <div className="seat">
             <h4 className="book-details"><span className="icon-shape"><ion-icon name="calendar-sharp"></ion-icon></span>
-                From Date : 29-03-2023</h4>
-            <h4 className="book-details"><span className="icon-shape"><ion-icon name="calendar-sharp"></ion-icon></span> To Date : 29-03-2023</h4> 
-            <h4 className="book-details"><span className="icon-shape"><ion-icon name="time-sharp"></ion-icon></span> Shift Time :  09:00AM - 06:00PM</h4> 
-            <h4 className="book-details"><span className="icon-shape"><ion-icon name="keypad-sharp"></ion-icon></span> Booked Seat Number : 70</h4> 
-            <h4 className="book-details"><span className="icon-shape"><ion-icon name="keypad-sharp"></ion-icon></span> Booking ID : SB-00853 </h4> 
+                From Date : {userData.booking.fromDate}</h4>
+            <h4 className="book-details"><span className="icon-shape"><ion-icon name="calendar-sharp"></ion-icon></span> To Date : {userData.booking.toDate}</h4> 
+            <h4 className="book-details"><span className="icon-shape"><ion-icon name="time-sharp"></ion-icon></span> Shift Time :  {userData.booking.shift}</h4> 
+            <h4 className="book-details"><span className="icon-shape"><ion-icon name="keypad-sharp"></ion-icon></span> Booked Seat Number : {userData.booking.seat}</h4> 
+            <h4 className="book-details"><span className="icon-shape"><ion-icon name="keypad-sharp"></ion-icon></span> Booking ID : {userData.booking.id} </h4> 
             </div>
             </div>
             <div className="seat-details-content">
             <div className="seat">
             <h4><span className="icon-shape"><ion-icon name="business-sharp"></ion-icon></span>
-                Floor : Ground Floor</h4>
+                Floor : {userData.booking.floor}</h4>
             <h4><span className="icon-shape"><ion-icon name="location-sharp"></ion-icon></span> Branch Name : Bengaluru</h4> 
             </div>
         </div>

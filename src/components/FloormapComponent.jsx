@@ -1,8 +1,113 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { createBookings, fetchSeat, updateSeatAvailability, updateUserBooking, userRecords } from "../api";
+import seat from '../assets/seat.png'
 import '../styles/floormap.css'
 
 let FloorMap=()=>{
+
+  let type=window.localStorage.getItem("type");
+  let from=window.localStorage.getItem("from");
+  let to=window.localStorage.getItem("to");
+  let shift=window.localStorage.getItem("shift");
+  let food=window.localStorage.getItem("food");
+  let floor=window.localStorage.getItem("floor");
+  let noOfSeats=window.localStorage.getItem("noOfSeats");
+
+  const [selectedSeat,setSelectedSeat]=useState('')
+  const [userData,setUserData]=useState({
+    id:'',name:'',email:'',phone:'',role:'',password:'',booking:{id:'0',type:'0' ,fromDate: '0',toDate:'0',shift:'0',floor: '0',seat:'0',status:''}
+      
+  })
+  console.log(userData)
+
+  const logData=async()=>{
+    let data={
+      token:window.localStorage.getItem("token")}
+    let response=await userRecords(data)
+    setUserData(response.data.data);
+    }
+
+    const getSeat=async(floor)=>{    
+      let response=await fetchSeat(floor);
+      let seats=response.data.seats;
+      window.localStorage.setItem("noOfSeats",seats);
+      
+    };
+
+ useEffect(()=>{  
+    logData();
+    getSeat(floor);
+  }
+ ,[])
+
+
+  const handleSeatSelection = (event) => {
+    setSelectedSeat(event.target.value);
+  };
+
+  const generateSeatContainers =  () => {
+    const seatContainers = [];
+    for (let i = 1; i <= noOfSeats; i++) {
+      const seatContainer = (
+        <div className="seat-container" key={i}>
+          <img src={seat} alt="Image" />
+          <label>
+            <input
+              type="radio"
+              name="seat"
+              value={i}
+              onClick={handleSeatSelection}
+              // disabled={i === 2}
+            />
+            <h6>{i}</h6>
+          </label>
+        </div>
+      );
+
+      seatContainers.push(seatContainer);
+    }
+
+    return  seatContainers;
+  };
+
+  const handleSubmit=async (e)=>{
+    e.preventDefault();
+    let bookId=Math.floor(Math.random() * 9000+ 1000)+userData.id;
+    // console.log(bookId);
+    let seat={
+      floor,
+      selectedSeat
+    }
+    
+    let data={
+      id:userData.id,
+      booknId:bookId,
+      type:type,
+      from:from,
+      to:to,
+      shift:shift,
+      food:food,
+      floor:floor,
+      seat:selectedSeat,
+      status:"active"
+    }
+    const createResponse = await createBookings(data);
+    // console.log(createResponse);
+    const updateResponse=await updateUserBooking(data);
+    // console.log(updateResponse);
+    const updateBookedResponse=await updateSeatAvailability(seat);
+      console.log(updateBookedResponse);
+    if(createResponse.data.success==true && updateResponse.data.success==true && updateBookedResponse==true){           
+      alert('Seat booked successfully');
+      window.location = "/booksuccess"
+    }else{
+      alert('Failed booking seat');
+    }
+
+    
+  }
+
     return (
         <div className="floormap-body">
             <header>
@@ -41,13 +146,13 @@ let FloorMap=()=>{
             
       <main className="floor-container">
         <div className="button-container">
-          <button id="btn1" className="btn btn-secondary">Floor : </button>
-          <button id="btn2" className="btn btn-secondary">Seat : </button>
+          <button id="btn1" className="btn btn-secondary">Floor : {floor}</button>
+          <button id="btn2" className="btn btn-secondary">Seat : {selectedSeat} </button>
         </div>
         <div className="map-design">
-            <form >   
+            <form onSubmit={handleSubmit}>   
             <div id="form-container">
-
+            {generateSeatContainers()}
               </div>     
             <div className="submit-button">
             <button id="book-btn" className="btn btn-secondary">Book Seat</button>

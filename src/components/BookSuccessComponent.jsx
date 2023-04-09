@@ -43,7 +43,7 @@ let BookSuccess=()=>{
                         <source src={successGIF} type="video/mp4" />
                     </video>  
                     <h3>Seat Booked Successfully!</h3>
-                    <a href="book_details.html"><button className="btn btn-secondary">View Pass</button></a>    
+                    <a href="/bookdetails"><button className="btn btn-secondary">View Pass</button></a>    
                 </div>  
             </div>
             <footer className="footer-container">

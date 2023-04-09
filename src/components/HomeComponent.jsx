@@ -72,7 +72,7 @@ let Home=()=>{
                       : <div className="home-details">
                         <h5>Your seating for Today</h5>
                         <h6>Your desk is {userData.booking.seat} at {userData.booking.floor}</h6>
-                        <a href="book_details.html"><button className="btn btn-secondary">View Pass</button></a>
+                        <a href="/bookdetails"><button className="btn btn-secondary">View Pass</button></a>
                      </div> }
           
         </div>
