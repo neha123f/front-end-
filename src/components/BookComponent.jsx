@@ -13,6 +13,7 @@ let Book=()=>{
   const [food, setFood] =useState('');
   const [floor, setFloor] =useState('');
   
+  
   // let formData={
   //   type,from,to
   // }
@@ -41,9 +42,6 @@ let Book=()=>{
     setMinDate(formattedDate);
   }
 
-
-  
-
   useEffect(() => {
     if (type == 'daily') {
       setTo(from);
@@ -54,6 +52,21 @@ let Book=()=>{
       setTo(newDate);
     }
   }, [from]);
+// const handleToDate=()=>{
+//   if (type == 'daily') {
+//     setTo(from);
+//   } else if (type == 'weekly') {
+//     const selectedDate = new Date(from);
+//     selectedDate.setDate(selectedDate.getDate() + 7);
+//     const newDate = selectedDate.toISOString().substr(0, 10);
+//     setTo(newDate);
+//   }
+//   console.log(to);
+// }
+
+const clearLocalStorage=()=>{
+  window.localStorage.clear();
+ }
 
 const handleSubmit=(e)=>{
   e.preventDefault();
@@ -86,14 +99,20 @@ const handleSubmit=(e)=>{
                 <li className="nav-item">
                   <a className="nav-link" aria-current="page" href="/home">Home</a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link btn btn-secondary" href="/book">Book Seat</a>
+                {
+                  userData.booking.id=='0' ?
+                  <li className="nav-item">
+                  <a className="nav-link btn btn-secondary" href="/book" >Book Seat</a>
+                </li> :
+                  <li className="nav-item">
+                  <a className="nav-link btn btn-secondary" href="/bookdetails" >View Pass</a>
                 </li>
+                }
                 <li className="nav-item">
                   <a className="nav-link" href="/profile">Profile</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Logout</a>
+                  <a className="nav-link" href="/" onClick={clearLocalStorage}>Logout</a>
                 </li>
               </ul>
             </div>
@@ -119,7 +138,7 @@ const handleSubmit=(e)=>{
                 <label for="type">Select type of requests</label>
               </div>
               <div className="form-floating mb-3">
-                <input type="date" className="form-control" name="from" id="from" required  onChange={(e)=>setFrom(e.target.value)} min={minDate} onFocus={handleMinDate}/>
+                <input type="date" className="form-control" name="from" id="from" required onChange={(e)=>setFrom(e.target.value)} min={minDate} onFocus={handleMinDate}/>
                 <label for="from">From Date</label>
               </div>
               <div className="form-floating mb-3">

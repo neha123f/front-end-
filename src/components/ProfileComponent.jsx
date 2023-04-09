@@ -24,6 +24,10 @@ let Profile=()=>{
   }
  ,[])
 
+ const clearLocalStorage=()=>{
+  window.localStorage.clear();
+ }
+
     return (
         <div className="profile-body">
             <header>
@@ -43,14 +47,20 @@ let Profile=()=>{
                 <li className="nav-item">
                   <a className="nav-link " aria-current="page" href="/home">Home</a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/book">Book Seat</a>
+                {
+                  userData.booking.id=='0' ?
+                  <li className="nav-item">
+                  <a className="nav-link" href="/book" >Book Seat</a>
+                </li> :
+                  <li className="nav-item">
+                  <a className="nav-link" href="/bookdetails" >View Pass</a>
                 </li>
+                }
                 <li className="nav-item">
                   <a className="nav-link btn btn-secondary" href="/profile">Profile</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Logout</a>
+                  <a className="nav-link" href="/" onClick={clearLocalStorage}>Logout</a>
                 </li>
               </ul>
             </div>

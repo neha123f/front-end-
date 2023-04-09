@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../styles/booksuccess.css'
 import successGIF from '../assets/book.mp4'
+import { userRecords } from "../api";
 
 let BookSuccess=()=>{
+
+  const [userData,setUserData]=useState({
+    id:'',name:'',email:'',phone:'',role:'',password:'',booking:{id:'0',type:'0' ,fromDate: '0',toDate:'0',shift:'0',floor: '0',seat:'0',status:false}
+      
+  })
+  console.log(userData)
+
+  const logData=async ()=>{
+    let data={
+      token:window.localStorage.getItem("token")}
+    let response=await userRecords(data)
+    setUserData(response.data.data);
+    }
+
+ useEffect(()=>{  
+    logData();
+  }
+ ,[])
+ const clearLocalStorage=()=>{
+  window.localStorage.clear();
+ }
     return (
         <div className="book-success-body">
             <header>
@@ -22,14 +44,20 @@ let BookSuccess=()=>{
                 <li className="nav-item">
                   <a className="nav-link " aria-current="page" href="/home">Home</a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link btn btn-secondary" href="/book">Book Seat</a>
+                {
+                  userData.booking.id=='0' ?
+                  <li className="nav-item">
+                  <a className="nav-link btn btn-secondary" href="/book" >Book Seat</a>
+                </li> :
+                  <li className="nav-item">
+                  <a className="nav-link btn btn-secondary" href="/bookdetails" >View Pass</a>
                 </li>
+                }
                 <li className="nav-item">
                   <a className="nav-link" href="/profile">Profile</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Logout</a>
+                  <a className="nav-link" href="/" onClick={clearLocalStorage}>Logout</a>
                 </li>
               </ul>
             </div>

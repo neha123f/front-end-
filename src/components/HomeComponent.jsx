@@ -20,8 +20,13 @@ let Home=()=>{
 
  useEffect(()=>{  
     logData();
+    
   }
  ,[])
+
+ const clearLocalStorage=()=>{
+  window.localStorage.clear();
+ }
     return (
     <div className="home-body">
     <header>
@@ -41,14 +46,21 @@ let Home=()=>{
                 <li className="nav-item">
                   <a className="nav-link btn btn-secondary" aria-current="page" href="/home">Home</a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/book">Book Seat</a>
+                {
+                  userData.booking.id=='0' ?
+                  <li className="nav-item">
+                  <a className="nav-link" href="/book" >Book Seat</a>
+                </li> :
+                  <li className="nav-item">
+                  <a className="nav-link" href="/bookdetails" >View Pass</a>
                 </li>
+                }
+                
                 <li className="nav-item">
                   <a className="nav-link" href="/profile">Profile</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Logout</a>
+                  <a className="nav-link" href="/" onClick={clearLocalStorage}>Logout</a>
                 </li>
               </ul>
             </div>

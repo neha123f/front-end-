@@ -13,7 +13,8 @@ let FloorMap=()=>{
   let food=window.localStorage.getItem("food");
   let floor=window.localStorage.getItem("floor");
   let noOfSeats=window.localStorage.getItem("noOfSeats");
-
+  let bookedSeats=window.localStorage.getItem("bookedSeats")
+  
   const [selectedSeat,setSelectedSeat]=useState('')
   const [userData,setUserData]=useState({
     id:'',name:'',email:'',phone:'',role:'',password:'',booking:{id:'0',type:'0' ,fromDate: '0',toDate:'0',shift:'0',floor: '0',seat:'0',status:''}
@@ -31,6 +32,8 @@ let FloorMap=()=>{
     const getSeat=async(floor)=>{    
       let response=await fetchSeat(floor);
       let seats=response.data.seats;
+      let bookedSeats=response.data.bookedSeats;
+      window.localStorage.setItem("bookedSeats",bookedSeats)
       window.localStorage.setItem("noOfSeats",seats);
       
     };
@@ -58,7 +61,7 @@ let FloorMap=()=>{
               name="seat"
               value={i}
               onClick={handleSeatSelection}
-              // disabled={i === 2}
+              disabled={bookedSeats.includes(i)}
             />
             <h6>{i}</h6>
           </label>
@@ -97,7 +100,8 @@ let FloorMap=()=>{
     const updateResponse=await updateUserBooking(data);
     // console.log(updateResponse);
     const updateBookedResponse=await updateSeatAvailability(seat);
-      console.log(updateBookedResponse);
+      console.log(updateBookedResponse.data);
+
     if(createResponse.data.success==true && updateResponse.data.success==true && updateBookedResponse==true){           
       alert('Seat booked successfully');
       window.location = "/booksuccess"
@@ -107,6 +111,10 @@ let FloorMap=()=>{
 
     
   }
+
+  const clearLocalStorage=()=>{
+    window.localStorage.clear();
+   }
 
     return (
         <div className="floormap-body">
@@ -127,14 +135,20 @@ let FloorMap=()=>{
                 <li className="nav-item">
                   <a className="nav-link " aria-current="page" href="/home">Home</a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link btn btn-secondary" href="/book">Book Seat</a>
+                {
+                  userData.booking.id=='0' ?
+                  <li className="nav-item">
+                  <a className="nav-link btn btn-secondary" href="/book" >Book Seat</a>
+                </li> :
+                  <li className="nav-item">
+                  <a className="nav-link btn btn-secondary" href="/bookdetails" >View Pass</a>
                 </li>
+                }
                 <li className="nav-item">
                   <a className="nav-link" href="/profile">Profile</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Logout</a>
+                  <a className="nav-link" href="/" onClick={clearLocalStorage}>Logout</a>
                 </li>
               </ul>
             </div>

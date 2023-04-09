@@ -38,7 +38,7 @@ const getSeatInfo=async(req,res)=>{
 }
 
 const updateSeatBooked=async(req,res)=>{
-    console.log(req.body);
+    // console.log(req.body);
     try {
         let floor=req.body.floor;
         const updatedSeat=await seatModel.findOneAndUpdate({floor:floor},{

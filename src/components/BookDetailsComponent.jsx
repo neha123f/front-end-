@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { userRecords } from "../api";
+import { updateUserBooking, updateUsers, userRecords } from "../api";
 import '../styles/bookdetails.css'
 
 let BookDetails=()=>{
@@ -23,6 +23,30 @@ let BookDetails=()=>{
  ,[])
 
 
+ const handleCancel=async ()=>{
+  let data={
+    id:userData.id,
+      booknId:"0",
+      type:"0",
+      from:"0",
+      to:"0",
+      shift:"0",
+      food:"0",
+      floor:"0",
+      seat:"0",
+      status:"0"
+  }   
+    const response=await updateUserBooking(data);
+    if(response.data.success==true){
+      alert("Canceled seat successfully")
+      window.location="/home";
+    }
+    
+ }
+
+ const clearLocalStorage=()=>{
+  window.localStorage.clear();
+ }
     return(
         <div className="bookdetails-body">
             <header>
@@ -42,14 +66,20 @@ let BookDetails=()=>{
                 <li className="nav-item">
                   <a className="nav-link " aria-current="page" href="/home">Home</a>
                 </li>
-                <li className="nav-item">
-                  <a className="nav-link btn btn-secondary" href="/book">Book Seat</a>
+                {
+                  userData.booking.id=='0' ?
+                  <li className="nav-item">
+                  <a className="nav-link btn btn-secondary" href="/book" >Book Seat</a>
+                </li> :
+                  <li className="nav-item">
+                  <a className="nav-link btn btn-secondary" href="/bookdetails" >View Pass</a>
                 </li>
+                }
                 <li className="nav-item">
                   <a className="nav-link" href="/profile">Profile</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/">Logout</a>
+                  <a className="nav-link" href="/" onClick={clearLocalStorage}>Logout</a>
                 </li>
               </ul>
             </div>
@@ -86,7 +116,7 @@ let BookDetails=()=>{
             </div>
         </div>
         <div className="submit-button">
-          <button id="book-btn" className="btn btn-secondary">Cancel Booking</button>
+          <button id="book-btn" className="btn btn-secondary" onClick={handleCancel}>Cancel Booking</button>
         </div>
 
             </main>
