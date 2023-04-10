@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-
-
 export const fetchUsers=()=>axios.get('http://localhost:8000/employees');
 export const createUsers=(formData)=>axios.post('http://localhost:8000/employees/add',formData);
 export const deleteUsers=(id)=>axios.get(`http://localhost:8000/employees/delete/${id}`);
@@ -19,3 +17,6 @@ export const updateSeatAvailability=(data)=>axios.post('http://localhost:8000/se
 
 
 export const createBookings=(formData)=>axios.post('http://localhost:8000/bookings/add',formData) 
+export const updateBookings=(formData)=>axios.post('http://localhost:8000/bookings/update',formData) 
+export const getBookings=(formData)=>axios.get(`http://localhost:8000/bookings/get/${formData}`) 
+export const updateCheckIn=(formData)=>axios.post('http://localhost:8000/bookings/updatetime',formData)

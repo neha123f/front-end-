@@ -38,6 +38,12 @@ let AdminReports=()=>{
                     </a>
                 </li>
                 <li>
+                    <a href="/adminseat" >
+                        <span className="icon"><ion-icon name="desktop-sharp"></ion-icon></span>
+                        <span className="name">Seats</span>
+                    </a>
+                </li>
+                <li>
                     <a href="/adminreports">
                         <span className="icon"><ion-icon name="keypad"></ion-icon></span>
                         <span className="name">Reports</span>

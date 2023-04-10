@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { updateUserBooking, updateUsers, userRecords } from "../api";
+import { updateBookings, updateUserBooking, updateUsers, userRecords } from "../api";
 import '../styles/bookdetails.css'
 
 let BookDetails=()=>{
@@ -40,7 +40,20 @@ let BookDetails=()=>{
     if(response.data.success==true){
       alert("Canceled seat successfully")
       window.location="/home";
+    }else{
+      alert("Problem with cancelling try after sometime")
     }
+
+    let updateData=userData.booking.id;
+    let bookId={
+      id:updateData,
+      status:"cancelled"
+    }
+    const updatedResponse=await updateBookings(bookId);
+    console.log(updatedResponse)
+    // if(updatedResponse.data.success==true){
+    //   console.log("booking updated")
+    // }
     
  }
 

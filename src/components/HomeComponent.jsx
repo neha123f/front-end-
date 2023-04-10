@@ -6,7 +6,7 @@ import { userRecords } from "../api";
 let Home=()=>{
 
   const [userData,setUserData]=useState({
-    id:'',name:'',email:'',phone:'',role:'',password:'',booking:{id:'0',type:'0' ,fromDate: '0',toDate:'0',shift:'0',floor: '0',seat:'0',status:false}
+    id:'',name:'',email:'',phone:'',role:'',password:'',booking:{id:'0',type:'0' ,fromDate: '0',toDate:'0',shift:'0',food:'0',floor: '0',seat:'0',status:false}
       
   })
   console.log(userData)

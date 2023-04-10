@@ -1,13 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../styles/admindashboard.css';
 import valtechLogo from '../assets/valtech-logo.jpg'
+import { getBookings, updateCheckIn } from "../api";
 
 let AdminBooking=()=>{
     const [isActive, setIsActive] = useState(false);
+    const [id,setId]=useState('');
+    const [bookData,setBookData]=useState([])
 
   function toggleSidebar() {
     setIsActive(!isActive);
   }
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+    let data=id;   
+    let inputResponse=await getBookings(data);
+    setBookData(inputResponse.data.data);
+    console.log(bookData);
+    
+}
+const handleConfirm=async()=>{
+    let data={
+        id:id,
+        time:Date().toLocaleString()
+    }
+    const updateResponse=await updateCheckIn(data);
+    if(updateResponse.data.success==true){
+        alert("Seat confirmed");
+    }
+}
     return (
         <div className="admin-container">
         <div className={`navigation ${isActive ? 'active' : ''}`}>
@@ -29,6 +51,12 @@ let AdminBooking=()=>{
                     <a href="/adminbookings" className="active-tab">
                         <span className="icon"><ion-icon name="calendar"></ion-icon></span>
                         <span className="name">Bookings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/adminseat" >
+                        <span className="icon"><ion-icon name="desktop-sharp"></ion-icon></span>
+                        <span className="name">Seats</span>
                     </a>
                 </li>
                 <li>
@@ -58,24 +86,25 @@ let AdminBooking=()=>{
                 </div>
             </div>
 
-            <form onsubmit="return false;">
+            <form >
                 
                 <div className="form-floating mb-3">
-                  <input type="text" className="form-control" name="bookingID" id="bookingID" required onchange="getFromDate()" />
+                  <input type="text" className="form-control" name="bookingID" id="bookingID" required onChange={(e)=>setId(e.target.value)} />
                   <label for="bookingID">Enter Booking ID</label>
                 </div>
                 
                 
-                <button className="btn btn-secondary">Next</button>
+                <button className="btn btn-secondary" onClick={handleSubmit}>Submit</button>
             </form>
             <h3>Booked Information</h3>
+            {bookData && (bookData.status=="cancelled" || bookData.status=="expired") ? <h4>No Booking available</h4>:
             <div className="table-container table-responsive">
                 <table className="table table-hover">
                     <thead className="table-dark">
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">Employee ID</th>
-                          <th scope="col">Employee Name</th>
+                          <th scope="col">Booking ID</th>
                           <th scope="col">Request Type</th>
                           <th scope="col">From Date</th>
                           <th scope="col">To Date</th>
@@ -85,22 +114,25 @@ let AdminBooking=()=>{
                           <th></th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td>@mdo</td>
-                          <td><button className="btn btn-success">Confirm</button></td>
-                        </tr>
+                      <tbody>                      
+                                <tr>
+                                {/* <th scope="row">{bookData.id}</th> */}
+                                <td>{bookData.userId}</td>
+                                <td>{bookData.id}</td>
+                                <td>{bookData.type}</td>
+                                <td>{bookData.fromDate}</td>
+                                <td>{bookData.toDate}</td>
+                                <td>{bookData.shift}</td>
+                                <td>{bookData.floor}-{bookData.food}</td>
+                                <td>{bookData.food}</td>
+                                
+                                <td><button className="btn btn-success" onClick={handleConfirm}>Confirm</button></td>
+                                </tr>
+                           
                       </tbody>
                   </table>
                 </div>
+                }
         </div>
     </div>
     )

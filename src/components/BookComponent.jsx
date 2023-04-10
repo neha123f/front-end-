@@ -12,12 +12,6 @@ let Book=()=>{
   const [shift, setShift] =useState('');
   const [food, setFood] =useState('');
   const [floor, setFloor] =useState('');
-  
-  
-  // let formData={
-  //   type,from,to
-  // }
-
   const [userData,setUserData]=useState({
     id:'',name:'',email:'',phone:'',role:'',password:'',booking:{id:'0',type:'0' ,fromDate: '0',toDate:'0',shift:'0',floor: '0',seat:'0',status:false}
       
@@ -43,26 +37,16 @@ let Book=()=>{
   }
 
   useEffect(() => {
-    if (type == 'daily') {
+    if (type == 'Daily') {
       setTo(from);
-    } else if (type == 'weekly') {
+    } else if (type == 'Weekly') {
       const selectedDate = new Date(from);
       selectedDate.setDate(selectedDate.getDate() + 7);
       const newDate = selectedDate.toISOString().substr(0, 10);
       setTo(newDate);
     }
   }, [from]);
-// const handleToDate=()=>{
-//   if (type == 'daily') {
-//     setTo(from);
-//   } else if (type == 'weekly') {
-//     const selectedDate = new Date(from);
-//     selectedDate.setDate(selectedDate.getDate() + 7);
-//     const newDate = selectedDate.toISOString().substr(0, 10);
-//     setTo(newDate);
-//   }
-//   console.log(to);
-// }
+
 
 const clearLocalStorage=()=>{
   window.localStorage.clear();
@@ -130,7 +114,7 @@ const handleSubmit=(e)=>{
           <div className="booking-details">
             <form className="booking-form" onSubmit={handleSubmit}>
               <div className="form-floating mb-3">
-                <select className="form-select" name="type" id="type" required onInput={(e)=>setType(e.target.value)}>
+                <select className="form-select" name="type" id="type" required onChange={(e)=>setType(e.target.value)}>
                   <option selected></option>
                   <option value="Daily">Daily</option>
                   <option value="Weekly">Weekly</option>

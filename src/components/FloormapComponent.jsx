@@ -102,11 +102,12 @@ let FloorMap=()=>{
     const updateBookedResponse=await updateSeatAvailability(seat);
       console.log(updateBookedResponse.data);
 
-    if(createResponse.data.success==true && updateResponse.data.success==true && updateBookedResponse==true){           
-      alert('Seat booked successfully');
+    if(createResponse.data.success==true && updateResponse.data.success==true && updateBookedResponse.data.success==true){           
+      // alert('Seat booked successfully');
       window.location = "/booksuccess"
     }else{
       alert('Failed booking seat');
+      window.location = "/home"
     }
 
     

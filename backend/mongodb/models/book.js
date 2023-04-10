@@ -11,7 +11,7 @@ const BookSchema=new mongoose.Schema({
     floor:{type:String,default:0},
     seat:{type:String,default:0},
     status:{type:String,default:0},
-    chechInTime:{type:String,default:0}
+    checkInTime:{type:String,default:0}
     
     // allProperties:[{type:mongoose.Schema.Types.ObjectId,ref:'Property'}]
 });
