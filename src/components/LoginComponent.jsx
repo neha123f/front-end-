@@ -11,21 +11,21 @@ let Login=()=>{
     const handleSubmit=async (e)=>{
         e.preventDefault();
 
-        if(username==="admin" && password==="admin@123"){
-          window.location="/admin";
-        }
-        let data={
-          username,
-          password
-        }
-        const response=await loginUsers(data);
-        console.log(response.data.data);
-        if(response.data.error){
-          alert(response.data.error)
-        }else{
-          window.localStorage.setItem("token",response.data.data)
+    //     if(username==="admin" && password==="admin@123"){
+    //       window.location="/admin";
+    //     }
+    //     let data={
+    //       username,
+    //       password
+    //     }
+    //     const response=await loginUsers(data);
+    //     console.log(response.data.data);
+    //     if(response.data.error){
+    //       alert(response.data.error)
+    //     }else{
+          // window.localStorage.setItem("token",response.data.data)
           window.location="/home";
-        }
+    //     }
 
     }
 
@@ -42,7 +42,7 @@ let Login=()=>{
           id="username"
           placeholder="Enter Employee ID"
           required
-          onChange={(e)=>setUsername(e.target.value)}
+          // onChange={(e)=>setUsername(e.target.value)}
         />
         <label htmlFor="password">Password</label>
         <input
@@ -51,7 +51,7 @@ let Login=()=>{
           id="password"
           placeholder="Enter Password"
           required
-          onChange={(e)=>setPassword(e.target.value)}
+          // onChange={(e)=>setPassword(e.target.value)}
         />
         <div className="forget">
           <a href="/forgot">Forgot Password?</a>

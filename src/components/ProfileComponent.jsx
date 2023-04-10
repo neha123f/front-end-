@@ -81,23 +81,23 @@ let Profile=()=>{
             <div className="user-info-content">
                 <div className="container">
                     <p id="qun">Name</p>
-                    <p id="ans">{userData.name}</p>
+                    <p id="ans">neha</p>
                 </div>
                 <div className="container">
                     <p id="qun">Employee ID</p>
-                    <p id="ans">{userData.id}</p>
+                    <p id="ans">5495</p>
                 </div>
                 <div className="container">
                     <p id="qun">Email ID</p>
-                    <p id="ans">{userData.email}</p>
+                    <p id="ans">fathima.neha@valtech.com</p>
                 </div>
                 <div className="container">
                     <p id="qun">Phone number</p>
-                    <p id="ans">{userData.phone}</p>
+                    <p id="ans">93847923793</p>
                 </div>
                 <div className="container">
                     <p id="qun">Role</p>
-                    <p id="ans">{userData.role}</p>
+                    <p id="ans">Associate software developer</p>
                 </div>
             </div>
         </div>

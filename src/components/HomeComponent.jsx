@@ -75,7 +75,7 @@ let Home=()=>{
         </div>
         <div className="home-book-content lineUp">
           <h3>Hello,</h3>
-          <h3>{userData.name}!!</h3>
+          <h3>neha</h3>
           {userData.booking.id=='0' ?
                     <div className="home-details"> 
                       <h5>You have not booked any seat</h5>
